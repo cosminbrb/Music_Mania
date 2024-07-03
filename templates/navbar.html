@@ -1,0 +1,66 @@
+{% load static %}
+{#<img src="{% static 'Users/img1.jpg' %}"#}
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">All Day Blues</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Legends
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'albert' %}">Albert King</a></li>
+                        <li><a class="dropdown-item" href="{% url 'bb' %}">B.B. King</a></li>
+                        <li><a class="dropdown-item" href="{% url 'buddy' %}">Buddy Guy</a></li>
+                        <li><a class="dropdown-item" href="{% url 'eric' %}">Eric Clapton</a></li>
+                        <li><a class="dropdown-item" href="{% url 'srv' %}">S.R.V</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        New kids on the block
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'beth' %}">Beth Hart</a></li>
+                        <li><a class="dropdown-item" href="{% url 'christone' %}">Christone "Kingfish" Ingram</a></li>
+                        <li><a class="dropdown-item" href="{% url 'joe' %}">Joe Bonamassa</a></li>
+                        <li><a class="dropdown-item" href="{% url 'susan' %}">Susan Tedeschi</a></li>
+                    </ul>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'howtoplay' %}">How to play in the
+                        style
+                        of</a>
+                </li>
+            
+            </ul>
+
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-secondary">Logout, {{ user.username }}</button>
+                </form>
+            {% else %}
+                <div>
+                    <a href="{% url 'login' %}" class="btn btn-outline-secondary">Login</a>
+                    <a href="{% url 'create-user' %}" class="btn btn-outline-secondary">Sign Up</a>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+</nav>
