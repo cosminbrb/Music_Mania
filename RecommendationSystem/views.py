@@ -1,5 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from MusicStoreManager.models import MelodiesToLearn
+from .models import Like
 
-# Create your views here.
-class TestView:
-    pass
+@login_required
+def like_melody(request, pk):
+    melody = get_object_or_404(MelodiesToLearn, pk=pk)
+    user = request.user
+    Like.objects.get_or_create(user=user, melody=melody)
+    return redirect('home.html')

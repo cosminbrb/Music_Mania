@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('recommendation/', include('RecommendationSystem.urls')),
     path('', include ('MusicStoreManager.urls')),
 
     path('login/', views.LoginView.as_view(form_class=AuthentificationNewForm), name='login'),

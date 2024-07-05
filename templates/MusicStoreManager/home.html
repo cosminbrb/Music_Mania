@@ -3,8 +3,16 @@
 {% block title %} Home {% endblock %}
 
 {% block content %}
-<br><br><br>
-<p>Hello</p>
-
+    <br><br><br>
+{% for melody in melodies %}
+    <div>
+        <h3>{{ melody.name }} - {{ melody.get_style_display }}</h3>
+        <form method="POST" action="{% url 'like-melody' melody.pk %}">
+            {% csrf_token %}
+            <button type="submit">Like</button>
+        </form>
+        <p>Likes: {{ melody.like_set.count }}</p>
+    </div>
+{% endfor %}
 {% endblock %}
 

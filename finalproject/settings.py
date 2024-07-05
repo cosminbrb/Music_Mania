@@ -127,9 +127,4 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# # EMAIL_HOST = 'mail.aplicatiedjango.ro'
-# EMAIL_HOST_USER = 'musicblog@aplicatiedjango,ro'
-# EMAIL_HOST_PASSWORD = 'Django1234!'
-# EMAIL_PORT = 587
-# DEFAULT_FROM_EMAIL = 'musicblog@aplicatiedjango,ro'
+

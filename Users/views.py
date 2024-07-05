@@ -29,28 +29,14 @@ class UserCreateView (CreateView):
         new_user.first_name = new_user.first_name.title()
         new_user.last_name = new_user.last_name.title()
 
-        # random_number = randint (1000, 9999)
-        # new_user.username = f'{new_user.first_name[0].lower ()}{new_user.last_name[0].lower ().replace (" ", "")}_{random_number}'
 
         new_user.save()
         return super(UserCreateView, self).form_valid(form)
+
 class CustomLogoutView (LogoutView):
     def dispatch(self, *args, **kwargs):
         logout(self.request)
         return redirect('login')
-
-        # Trimitere mail cu tempalte
-        # details_user = {
-        #     'full_name': f'{new_user.first_name} {new_user.last_name}',
-        #     'username': new_user.username,
-        #
-        # }
-        # subject = 'Confirmare cont nou!'
-        # message = get_template('mail.html').render(details_user)
-        # mail = EmailMessage(subject, message, EMAIL_HOST_USER, [new_user.email])
-        # mail.get_content_subtype = 'html'
-        # mail.send()
-
 
 class CustomPasswordResetView (PasswordResetView):
     template_name = 'registration/password_reset.html'
@@ -73,3 +59,4 @@ class CustomPasswordResetDoneView (PasswordResetDoneView):
 
 class CustomPasswordResetCompleteView (PasswordResetCompleteView):
     template_name = 'registration/password_reset_complete.html'
+
