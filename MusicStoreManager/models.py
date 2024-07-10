@@ -1,27 +1,30 @@
 from django.db import models
 
 class MelodiesToLearn(models.Model):
-    BLUES = 'BL'
-    BLUES_ROCK = 'BR'
-    JAZZ = 'JZ'
-    POP = 'PP'
-
     STYLE_CHOICES = [
-        (BLUES, 'Blues'),
-        (BLUES_ROCK, 'Blues Rock'),
-        (JAZZ, 'Jazz'),
-        (POP, 'Pop'),
+        ('BL', 'Blues'),
+        ('BR', 'Blues Rock'),
+        ('JZ', 'Jazz'),
+        ('PP', 'Pop'),
     ]
 
     name = models.CharField(max_length=100)
     style = models.CharField(
         max_length=2,
         choices=STYLE_CHOICES,
-        default=BLUES,
+        default='BL',
     )
 
     def __str__(self):
         return f'{self.name} - {self.get_style_display()}'
+
+class Music(models.Model):
+    title = models.CharField(max_length=100)
+    artist = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.title} by {self.artist}'
 
 class User(models.Model):
     name = models.CharField(max_length=100)
@@ -30,3 +33,14 @@ class User(models.Model):
 
     def __str__(self):
         return self.name
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    music = models.ForeignKey(Music, on_delete=models.CASCADE)
+    liked_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'music')
+
+    def __str__(self):
+        return f'{self.user.name} liked {self.music.title}'

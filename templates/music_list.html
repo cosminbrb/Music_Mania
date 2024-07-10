@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Music List</h2>
+  <ul>
+    {% for music in music_list %}
+      <li>{{ music.title }} by {{ music.artist }}
+          <a href="{% url 'like_music' music.id %}">Like</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

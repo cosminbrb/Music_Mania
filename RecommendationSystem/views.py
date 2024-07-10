@@ -1,11 +1,16 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from MusicStoreManager.models import MelodiesToLearn
-from .models import Like
+from django.utils.decorators import method_decorator
+from django.views import View
+from .models import MelodiesToLearn, Like
 
-@login_required
-def like_melody(request, pk):
-    melody = get_object_or_404(MelodiesToLearn, pk=pk)
-    user = request.user
-    Like.objects.get_or_create(user=user, melody=melody)
-    return redirect('home.html')
+@method_decorator(login_required, name='dispatch')
+class LikeMelodyView(View):
+    def post(self, request, pk):
+        melody = get_object_or_404(MelodiesToLearn, pk=pk)
+        user = request.user
+        Like.objects.get_or_create(user=user, melody=melody)
+        return redirect('home.html')
+
+    def get(self, request, pk):
+        return self.post(request, pk)

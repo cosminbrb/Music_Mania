@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import like_melody
+from .views import LikeMelodyView
 
 urlpatterns = [
-    path ('like/<int:pk>/', like_melody, name='like-melody'),
+    path('like/<int:pk>/', LikeMelodyView.as_view(), name='like_melody'),
 ]

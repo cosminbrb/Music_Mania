@@ -1,5 +1,6 @@
 from django.urls import path
 from MusicStoreManager import views
+from .views import AddMelodyView
 
 urlpatterns = [
     path('', views.HomeViewTemplate.as_view (), name='home'),
@@ -13,5 +14,9 @@ urlpatterns = [
     path('joe/', views.JoeViewTemplate.as_view(), name='joe'),
     path('srv/', views.SRVViewTemplate.as_view(), name='srv'),
     path('susan/', views.SusanViewTemplate.as_view (), name='susan'),
+
+    path ('melody/<int:music_id>/like/', views.LikeMusicView.as_view (), name='like_music'),
+    path ('recommendations/', views.RecommendMusicView.as_view (), name='recommend_music'),
+    path('add-melody/', AddMelodyView.as_view(), name='add_melody'),
 
 ]
